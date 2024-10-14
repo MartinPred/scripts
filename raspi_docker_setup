@@ -6,3 +6,36 @@ sudo apt update
 sudo apt upgrade -y
 curl -sSL https://get.docker.com | sh
 docker run -d -p 9001:9001 --name portainer_agent --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes portainer/agent:latest
+
+
+
+#pi@raspberry-docker:~/docker/nut $ cd config/
+#pi@raspberry-docker:~/docker/nut/config $ ls -la
+#total 24
+#drwxr-x--- 2 root pi   4096 Oct 14 16:26 .
+#drwxr-xr-x 3 root root 4096 Oct 14 16:26 ..
+#-rw-r----- 1 root pi     54 Oct 14 16:26 ups.conf
+#-rw-r----- 1 root pi     20 Oct 14 16:26 upsd.conf
+#-rw-r----- 1 root pi    136 Oct 14 16:26 upsd.users
+#-rw-r----- 1 root pi     99 Oct 14 16:26 upsmon.conf
+#pi@raspberry-docker:~/docker/nut/config $ cat ups.conf
+#[ups]
+#        desc = "UPS"
+#        driver = usbhid-ups
+#        port = auto
+#pi@raspberry-docker:~/docker/nut/config $ cat upsd.conf
+#LISTEN 0.0.0.0 3493
+#pi@raspberry-docker:~/docker/nut/config $ cat upsd.users
+#[admin]
+#        password = L9j/m4N0mgRX5n5wayHpLx96
+#        actions = set
+#        actions = fsd
+#        instcmds = all
+#[monitor]
+#        password = secret
+#        upsmon master
+#pi@raspberry-docker:~/docker/nut/config $ cat upsmon.conf
+#MONITOR ups@localhost 1 monitor secret master
+#SHUTDOWNCMD "echo 'System shutdown not configured!'"
+#pi@raspberry-docker:~/docker/nut/config $
+
